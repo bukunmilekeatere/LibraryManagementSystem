@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LibraryManagementSystem
 {
-    internal class Magazines : IItem
+    public class Magazines : IItem
     {
         public string Title { get; set; }
         public string Distributor { get; set; }
