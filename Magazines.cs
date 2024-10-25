@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LibraryManagementSystem
 {
-    internal class Magazines : IMedia
+    internal class Magazines : IItem
     {
         public string Title { get; set; }
         public string Distributor { get; set; }
@@ -15,25 +15,28 @@ namespace LibraryManagementSystem
 
         public int SerialNumber { get; set; }
 
-        public string MediaType { get; set; }
+        public string ItemType { get; set; }
 
         public DateOnly DueDate { get; set; }
 
         public bool InUse { get; set; } = false;
 
-        public Magazines(string title, string author, string distributor, int serialNumber, string mediaType, DateOnly dueDate)
+        public decimal Cost { get; set; }
+
+        public Magazines(string title, string author, string distributor, int serialNumber, string itemType, DateOnly dueDate, decimal cost)
         {
             this.Title = title;
             this.Author = author;
             this.Distributor = distributor;
             this.SerialNumber = serialNumber;
-            this.MediaType = mediaType;
+            this.ItemType = itemType;
             this.DueDate = dueDate;
+            this.Cost = cost;
         }
 
         public void GetInfo()
         {
-            Console.WriteLine($"Media Type: {MediaType}, Magazine Author: {Author}, Title: {Title}, Magazine Distributor: {Distributor}, Magazine Number: {SerialNumber}");
+            Console.WriteLine($"Item Type: {ItemType}, Magazine Author: {Author}, Title: {Title}, Magazine Distributor: {Distributor}, Magazine Number: {SerialNumber}, Cost: {Cost}");
         }
 
         public bool IsAvailable()
@@ -64,11 +67,6 @@ namespace LibraryManagementSystem
             {
                 Console.WriteLine($"The magazine, {Title} is available for loan.");
             }
-        }
-
-        public void CalculateOverDueFine()
-        {
-
         }
     }
 }

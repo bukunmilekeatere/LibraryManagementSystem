@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LibraryManagementSystem
 {
-    public class DVD : IMedia
+    public class DVD : IItem
     {
         public string ProducerName { get; set; }
         public string Title { get; set; }
@@ -14,26 +14,29 @@ namespace LibraryManagementSystem
 
         public int SerialNumber { get; set; }
 
-        public string MediaType { get; set; }
+        public string ItemType { get; set; }
 
         public DateOnly DueDate { get; set; }
 
         public bool InUse { get; set; } = false;
 
-        public DVD(string producerName, string title, string genre, int serialNumber,string mediaType, DateOnly dueDate) 
+        public decimal Cost { get; set; }
+
+        public DVD(string producerName, string title, string genre, int serialNumber,string itemType, DateOnly dueDate, decimal cost) 
         {
             this.ProducerName = producerName;
             this.Title = title;
             this.Genre = genre;
             this.SerialNumber = serialNumber;
-            this.MediaType = mediaType;
+            this.ItemType = itemType;
             this.DueDate = dueDate;
+            this.Cost = cost;
         }
 
 
         public void GetInfo()
         {
-            Console.WriteLine($"Media Type: {MediaType}, Producer: {ProducerName}, Book Title: {Title}, Book Genre: {Genre}, Book Identification Number: {SerialNumber}");
+            Console.WriteLine($"Item Type: {ItemType}, Producer: {ProducerName}, Book Title: {Title}, Book Genre: {Genre}, Book Identification Number: {SerialNumber}, Cost: {Cost}");
         }
 
         public bool IsAvailable()
@@ -64,11 +67,6 @@ namespace LibraryManagementSystem
             {
                 Console.WriteLine($"The book, {Title} is available for loan.");
             }
-        }
-
-        public void CalculateOverDueFine()
-        {
-
         }
     }
 }

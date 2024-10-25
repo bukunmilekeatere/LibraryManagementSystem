@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace LibraryManagementSystem
 {
-    public interface IMedia
+    public interface IItem
     {
-        string MediaType { get; set; }
+        string ItemType { get; set; }
 
         int SerialNumber { get; set; }
 
@@ -18,12 +18,12 @@ namespace LibraryManagementSystem
 
         bool InUse { get; set; }
 
+        decimal Cost { get; set; }
+
         void GetInfo();
 
         bool IsAvailable();
 
         void GetDueDate();
-
-        void CalculateOverDueFine();
     }
 }

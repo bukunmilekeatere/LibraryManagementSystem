@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LibraryManagementSystem
 {
-    public class Books : IMedia
+    public class Books : IItem
     {
         public string AuthorName { get; set; }
         public string Title { get; set; }
@@ -15,14 +15,16 @@ namespace LibraryManagementSystem
 
         public int PageCount { get; set; }
 
-        public string MediaType { get; set; }
+        public string ItemType { get; set; }
 
         public DateOnly DueDate { get; set; }
 
         public bool InUse { get; set; } = false;
 
+        public decimal Cost { get; set; }
 
-        public Books(string authorName, string title, string genre, int serialNumber, int pageCount, DateOnly dueDate, string mediaType)
+
+        public Books(string authorName, string title, string genre, int serialNumber, int pageCount, DateOnly dueDate, string itemType, decimal cost)
         {
             this.AuthorName = authorName;
             this.Title = title;
@@ -30,12 +32,13 @@ namespace LibraryManagementSystem
             this.SerialNumber = serialNumber;
             this.PageCount = pageCount;
             this.DueDate = dueDate;
-            this.MediaType = mediaType;
+            this.ItemType = itemType;
+            this.Cost = cost;    
         }
 
         public void GetInfo()
         {
-            Console.WriteLine($"Media Type: {MediaType}, Author: {AuthorName}, Book Title: {Title}, Book Genre: {Genre}, Book Identification Number: {SerialNumber}, Page Count of Book: {PageCount}");
+            Console.WriteLine($"Item Type: {ItemType}, Author: {AuthorName}, Book Title: {Title}, Book Genre: {Genre}, Book Identification Number: {SerialNumber}, Page Count of Book: {PageCount}, Cost: {Cost}");
         }
 
         public bool IsAvailable()
@@ -66,11 +69,6 @@ namespace LibraryManagementSystem
             {
                 Console.WriteLine($"The book, {Title} is available for loan.");
             }
-        }
-
-        public void CalculateOverDueFine()
-        {
-
         }
 
     }
