@@ -9,24 +9,20 @@ namespace LibraryManagementSystem
 {
     public class Loans
     {
-        public int LoanerId { get; set; }
 
         public IItem Item { get; set; }
 
         public DateOnly LoanDate { get; set; }
 
-        public string LoanerName { get; set; }
+        public UserManagement UserLoan { get; set; }
 
-
-        public Loans(int loanerId, IItem item, DateOnly loanDate, string loanerName)
+        public Loans(IItem item, DateOnly loanDate, UserManagement userLoan)
         {
-            LoanerId = loanerId;
             Item = item;
             LoanDate = loanDate;
-            LoanerName = loanerName;
             Item.InUse = true;
+            UserLoan = userLoan;          
         }
-
         public bool ItemOverdue()
         {
             // used FromDateTime to get only the date and not the time to see if the due date for returns have been exceeded
@@ -52,15 +48,11 @@ namespace LibraryManagementSystem
             }
         }
 
-        public void ReturnItem()
-        {
-            Item.InUse = false;
-            Console.WriteLine($"{Item} has been returned");
-        }
-
         public void GetDetails()
         {
-            Console.WriteLine($"Details of Loan - Loaner Name: {LoanerName}, Loaner Id: {LoanerId}, Loan Date: {LoanDate}, Due Date: {Item.DueDate}");
+            Console.WriteLine($"Details of Loan - Loaner Name: {UserLoan.Name}, Loaner Id: {UserLoan.UserId}, Loan Date: {LoanDate}, Due Date: {Item.DueDate}");
+            // adds loaned items to users loan list
+            UserLoan.BorrowItem(this);
             Item.GetInfo();
         }
     }
