@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LibraryManagementSystem.Interfaces;
 
-namespace LibraryManagementSystem
+namespace LibraryManagementSystem.Media
 {
     public class Magazines : IItem
     {
@@ -25,13 +26,13 @@ namespace LibraryManagementSystem
 
         public Magazines(string title, string author, string distributor, int serialNumber, string itemType, DateOnly dueDate, decimal cost)
         {
-            this.Title = title;
-            this.Author = author;
-            this.Distributor = distributor;
-            this.SerialNumber = serialNumber;
-            this.ItemType = itemType;
-            this.DueDate = dueDate;
-            this.Cost = cost;
+            Title = title;
+            Author = author;
+            Distributor = distributor;
+            SerialNumber = serialNumber;
+            ItemType = itemType;
+            DueDate = dueDate;
+            Cost = cost;
         }
 
         public void GetInfo()

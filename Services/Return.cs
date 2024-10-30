@@ -1,4 +1,6 @@
-﻿using LibraryManagementSystem;
+﻿using LibraryManagementSystem.Interfaces;
+using LibraryManagementSystem.Managers;
+using LibraryManagementSystem.Services;
 using System;
 
 public class Returns : Loans

@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LibraryManagementSystem.Interfaces;
 
-namespace LibraryManagementSystem
+namespace LibraryManagementSystem.Media
 {
     public class Books : IItem
     {
@@ -26,14 +27,14 @@ namespace LibraryManagementSystem
 
         public Books(string authorName, string title, string genre, int serialNumber, int pageCount, DateOnly dueDate, string itemType, decimal cost)
         {
-            this.AuthorName = authorName;
-            this.Title = title;
-            this.Genre = genre;
-            this.SerialNumber = serialNumber;
-            this.PageCount = pageCount;
-            this.DueDate = dueDate;
-            this.ItemType = itemType;
-            this.Cost = cost;    
+            AuthorName = authorName;
+            Title = title;
+            Genre = genre;
+            SerialNumber = serialNumber;
+            PageCount = pageCount;
+            DueDate = dueDate;
+            ItemType = itemType;
+            Cost = cost;
         }
 
         public void GetInfo()

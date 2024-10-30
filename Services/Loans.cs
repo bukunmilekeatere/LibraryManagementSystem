@@ -4,8 +4,10 @@ using System.Linq;
 using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
+using LibraryManagementSystem.Interfaces;
+using LibraryManagementSystem.Managers;
 
-namespace LibraryManagementSystem
+namespace LibraryManagementSystem.Services
 {
     public class Loans
     {
@@ -21,7 +23,7 @@ namespace LibraryManagementSystem
             Item = item;
             LoanDate = loanDate;
             Item.InUse = true;
-            UserLoan = userLoan;          
+            UserLoan = userLoan;
         }
         public bool ItemOverdue()
         {

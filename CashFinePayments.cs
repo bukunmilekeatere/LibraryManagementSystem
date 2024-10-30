@@ -10,10 +10,10 @@ namespace LibraryManagementSystem
     {
         private string paymentType;
 
-        public string PaymentType 
-        { 
-            get { return paymentType;} 
-            set { paymentType  = value; }
+        public string PaymentType
+        {
+            get { return paymentType; }
+            set { paymentType = value; }
         }
 
         private decimal paymentAmount;
@@ -43,7 +43,7 @@ namespace LibraryManagementSystem
 
         public CashFinePayments(decimal paymentAmount, string paymentCurrency)
         {
-            this.paymentType = "Cash Payment";
+            paymentType = "Cash Payment";
             this.paymentAmount = paymentAmount;
             this.paymentCurrency = paymentCurrency;
         }

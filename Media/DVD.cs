@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LibraryManagementSystem.Interfaces;
 
-namespace LibraryManagementSystem
+namespace LibraryManagementSystem.Media
 {
     public class DVD : IItem
     {
@@ -22,15 +23,15 @@ namespace LibraryManagementSystem
 
         public decimal Cost { get; set; }
 
-        public DVD(string producerName, string title, string genre, int serialNumber,string itemType, DateOnly dueDate, decimal cost) 
+        public DVD(string producerName, string title, string genre, int serialNumber, string itemType, DateOnly dueDate, decimal cost)
         {
-            this.ProducerName = producerName;
-            this.Title = title;
-            this.Genre = genre;
-            this.SerialNumber = serialNumber;
-            this.ItemType = itemType;
-            this.DueDate = dueDate;
-            this.Cost = cost;
+            ProducerName = producerName;
+            Title = title;
+            Genre = genre;
+            SerialNumber = serialNumber;
+            ItemType = itemType;
+            DueDate = dueDate;
+            Cost = cost;
         }
 
 
