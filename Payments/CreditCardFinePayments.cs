@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LibraryManagementSystem
+namespace LibraryManagementSystem.Payments
 {
     public class CreditCardFinePayments
     {
@@ -43,7 +43,7 @@ namespace LibraryManagementSystem
 
         public CreditCardFinePayments(decimal paymentAmount, string paymentCurrency)
         {
-            this.paymentType = "Credit Card Payment";
+            paymentType = "Credit Card Payment";
             this.paymentAmount = paymentAmount;
             this.paymentCurrency = paymentCurrency;
         }
