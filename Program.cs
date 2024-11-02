@@ -9,48 +9,48 @@ namespace LibraryManagementSystem
     {
         public static void Main(string[] args)
         {
-
-            // Instantiate AccountManager to manage users
+            // accountmanager to manage users
             AccountManager accountManager = new AccountManager();
 
-            // Step 1: Create user1 using UserAccount builder pattern
+            // user1 using  builder pattern
             User user1 = new UserAccount()
                 .UserName("Ella Charles")
                 .UserEmail("ella.charles@example.com")
-                .UserPhone("204-698-2682")
-                .UserPassword("password123")
+                .UserPhone("204-123-4567")
+                .UserPassword("HYUEU45jk")
                 .UserCreate();
 
-            // Step 2: Add user1 to the AccountManager
-            Console.WriteLine("Adding user1:");
+            Console.WriteLine("adding user1:");
             accountManager.AddUser(user1);
 
-            // Step 3: Create a second user (user2) and add to AccountManager
+            //  add to AccountManager
             User user2 = new UserAccount()
-                .UserName("John Doe")
-                .UserEmail("john.doe@example.com")
-                .UserPhone("204-555-1234")
-                .UserPassword("doeSecurePass")
+                .UserName("Adeola Yusuf")
+                .UserEmail("adeola.yusuf@example.com")
+                .UserPhone("204-891-0112")
+                .UserPassword("babyShark123")
                 .UserCreate();
 
-            Console.WriteLine("\nAdding user2:");
+            Console.WriteLine("Adding user2:");
             accountManager.AddUser(user2);
 
-            //add user1 again to check account 
-            Console.WriteLine("\nAttempting to add user1 again:");
-            accountManager.AddUser(user1);
+         
+            ReservationManager reservationManager = new ReservationManager();
 
-            //Remove user1 from the AccountManager
-            Console.WriteLine("\nRemoving user1:");
-            accountManager.RemoveUser(user1.UserId);
+            // Sample media items to reserve
+            Books book1 = new Books("Oluwabukunmi Leke-Atere", "A Guide to Being Short", "Non-Fiction", 123, 555, DateOnly.FromDateTime(DateTime.Now), "Book", 8.99m);
 
-            //remove a non-existent user
-            Console.WriteLine("\nAttempting to remove a non-existent user (random ID):");
-            accountManager.RemoveUser(14758120);
+            // maked reservation for user1
+            Console.WriteLine("creating a reservation:");
+            BaseReservation bookReservation = new BaseReservation(user1, book1);
+            reservationManager.AddReservation(bookReservation);
+            Console.WriteLine($"reservation made for {user1.Name} on book '{book1.Title}'");
 
-            accountManager.DisplayUsers();
+            Console.WriteLine("Completing book reservation for user1:");
+            reservationManager.CompleteReservation(bookReservation);
+            Console.WriteLine($"reservation status for '{book1.Title}': {bookReservation.Status}");
+
             Console.ReadLine();
         }
-
     }
 }

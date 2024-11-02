@@ -1,4 +1,4 @@
-﻿// BaseReservation.cs
+﻿
 using LibraryManagementSystem.Interfaces;
 using System;
 
@@ -14,16 +14,16 @@ public class BaseReservation : IReservation
         ReservedBy = reservedBy;
         ReservedItem = reservedItem;
         ReservationDate = DateTime.Now;
-        Status = "Active";
+        Status = "active";
     }
 
     public virtual void CancelReservation()
     {
-        Status = "Canceled";
+        Status = "canceled";
     }
 
     public virtual void CompleteReservation()
     {
-        Status = "Completed";
+        Status = "completed";
     }
 }

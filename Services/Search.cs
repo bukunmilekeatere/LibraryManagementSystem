@@ -1,31 +1,40 @@
-﻿
-// generic search  to find items in list based on condition
+﻿// SearchService.cs
 using LibraryManagementSystem.Interfaces;
 using System;
 using System.Collections.Generic;
 
-public class SearchService<T> where T : IItem
+namespace LibraryManagementSystem.Services
 {
-    private List<T> items;
+  
+    public class SearchService<T> where T : IItem
+    {
+        // items to search through.
+        private List<T> items;
 
-    // constructor to initialize searche with list 
-    public SearchService(List<T> items)
-    {
-        this.items = items;
-    }
-    // searches list for items that match 
-    public List<T> SearchBy(Func<T, bool> predicate)
-    {
-        List<T> results = new List<T>();
-        foreach (var item in items)
+        
+        public SearchService(List<T> items)
         {
-            // ff the item matches add 
-            if (predicate(item))
-            {
-                results.Add(item);
-            }
+            this.items = items; 
         }
-        return results;
-    }
 
+        // search for items that match whatever
+        public List<T> SearchBy(Func<T, bool> predicate)
+        {
+       
+            List<T> results = new List<T>();
+
+         
+            foreach (var item in items)
+            {
+                // iff the item matches add to results.
+                if (predicate(item))
+                {
+                    results.Add(item);
+                }
+            }
+
+            
+            return results;
+        }
+    }
 }
