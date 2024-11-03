@@ -3,7 +3,7 @@
 public interface IReservation
 {
     User ReservedBy { get; }
-    IItem ReservedItem { get; }
+    IMedia ReservedItem { get; }
     DateTime ReservationDate { get; }
     string Status { get; }
     void CancelReservation();

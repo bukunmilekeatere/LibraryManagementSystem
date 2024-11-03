@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LibraryManagementSystem.Interfaces
 {
-    public interface IItem
+    public interface IMedia
     {
         string ItemType { get; set; }
 
@@ -23,6 +23,10 @@ namespace LibraryManagementSystem.Interfaces
         void GetInfo();
 
         bool IsAvailable();
+
+        bool IsOverdue();
+
+        void Loan();
 
         void GetDueDate();
     }

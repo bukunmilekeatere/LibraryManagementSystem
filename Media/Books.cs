@@ -7,7 +7,7 @@ using LibraryManagementSystem.Interfaces;
 
 namespace LibraryManagementSystem.Media
 {
-    public class Books : IItem
+    public class Books : IMedia
     {
         public string AuthorName { get; set; }
         public string Title { get; set; }
@@ -24,8 +24,10 @@ namespace LibraryManagementSystem.Media
 
         public decimal Cost { get; set; }
 
+        private INotifier notifier;
 
-        public Books(string authorName, string title, string genre, int serialNumber, int pageCount, DateOnly dueDate, string itemType, decimal cost)
+
+        public Books(string authorName, string title, string genre, int serialNumber, int pageCount, DateOnly dueDate, string itemType, decimal cost, INotifier notifier)
         {
             AuthorName = authorName;
             Title = title;
@@ -35,6 +37,7 @@ namespace LibraryManagementSystem.Media
             DueDate = dueDate;
             ItemType = itemType;
             Cost = cost;
+            this.notifier = notifier;
         }
 
         public void GetInfo()
@@ -46,24 +49,45 @@ namespace LibraryManagementSystem.Media
         {
             if (!InUse)
             {
-                Console.WriteLine($"{Title} is not available for loan.");
-                InUse = true;
-                DueDate = DueDate.AddDays(30);
+                Console.WriteLine($"{Title} is available for loan.");
+                return true;
             }
 
             else
             {
-                Console.WriteLine($"{Title} is available for loan.");
+                Console.WriteLine($"{Title} is not available for loan.");
+                return false;
+            }
+        }
+
+        public bool IsOverdue()
+        {
+            return DateOnly.FromDateTime(DateTime.Now) > DueDate;
+        }
+
+        public void Loan()
+        {
+            if (IsAvailable())
+            {
+                InUse = true;
+                DueDate = DateOnly.FromDateTime(DateTime.Now).AddDays(30);
+                Console.WriteLine($"You loaned {Title}. It should be returned by {DueDate}");
             }
 
-            return InUse;
+            else
+            {
+                Console.WriteLine($"Cannot loan {Title}, it is in use");
+            }
         }
+
+
 
         public void GetDueDate()
         {
             if (!IsAvailable())
             {
                 Console.WriteLine($"The book, {Title} is not available for loan. It should be returned in 30 days on {DueDate}");
+                notifier.Notify($"!Reminder!: The book, {Title} is overdue and should have been returned by {DueDate}");
             }
 
             else

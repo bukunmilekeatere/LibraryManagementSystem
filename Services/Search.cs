@@ -6,7 +6,7 @@ using System.Collections.Generic;
 namespace LibraryManagementSystem.Services
 {
   
-    public class SearchService<T> where T : IItem
+    public class SearchService<T> where T : IMedia
     {
         // items to search through.
         private List<T> items;

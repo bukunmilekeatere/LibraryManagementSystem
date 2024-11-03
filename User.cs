@@ -10,8 +10,6 @@ public class User
 
     public Random generateUserId = new Random();
 
-    public UserManagement UserManagement { get; set; }
-
     public User()
     {
         Name = "";

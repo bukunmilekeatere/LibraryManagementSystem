@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LibraryManagementSystem.Interfaces;
 
 namespace LibraryManagementSystem.Payments
 {
-    public class CreditCardFinePayments
+    public class CreditCardFinePayments : IFine
     {
         private string paymentType;
 
@@ -14,6 +15,14 @@ namespace LibraryManagementSystem.Payments
         {
             get { return paymentType; }
             set { paymentType = value; }
+        }
+
+        private string paymentCurrency;
+
+        public string PaymentCurrency
+        {
+            get { return paymentCurrency; }
+            set { paymentCurrency = value; }
         }
 
         private decimal paymentAmount;
@@ -24,28 +33,11 @@ namespace LibraryManagementSystem.Payments
             set { paymentAmount = value; }
         }
 
-        private string paymentCurrency;
-
-        public string PaymentCurrency
+        public CreditCardFinePayments(decimal cost)
         {
-            get { return paymentCurrency; }
-            set
-            {
-
-                if (value != "CAD")
-                {
-                    throw new ArgumentException("Failed to validate. Input valid currency of Canadian Dollars");
-                }
-
-                paymentCurrency = value;
-            }
-        }
-
-        public CreditCardFinePayments(decimal paymentAmount, string paymentCurrency)
-        {
-            paymentType = "Credit Card Payment";
-            this.paymentAmount = paymentAmount;
-            this.paymentCurrency = paymentCurrency;
+            PaymentType = "Credit Card Payment";
+            PaymentCurrency = "CAD";
+            PaymentAmount = cost;
         }
 
         public bool ValidateFinePayment()
@@ -64,7 +56,7 @@ namespace LibraryManagementSystem.Payments
             Console.WriteLine($"{PaymentType} Authorized.");
         }
 
-        public void FineProcessing()
+        public void ProcessPayment()
         {
             Console.WriteLine($"{PaymentType} was successfully processed");
         }

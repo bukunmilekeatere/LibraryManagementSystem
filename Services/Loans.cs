@@ -12,13 +12,13 @@ namespace LibraryManagementSystem.Services
     public class Loans
     {
 
-        public IItem Item { get; set; }
+        public IMedia Item { get; set; }
 
         public DateOnly LoanDate { get; set; }
 
         public UserManagement UserLoan { get; set; }
 
-        public Loans(IItem item, DateOnly loanDate, UserManagement userLoan)
+        public Loans(IMedia item, DateOnly loanDate, UserManagement userLoan)
         {
             Item = item;
             LoanDate = loanDate;

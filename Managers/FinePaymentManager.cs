@@ -4,43 +4,34 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using LibraryManagementSystem.Payments;
+using LibraryManagementSystem.Interfaces;
 
 namespace LibraryManagementSystem.Managers
 {
     public class FinePaymentManager
     {
-        List<CashFinePayments> cashFinePaymentList = new List<CashFinePayments>();
-        List<CreditCardFinePayments> creditCardFinePaymentList = new List<CreditCardFinePayments>();
+        private readonly List<IFine> finePayments = new List<IFine>();
 
-        public void AddPayment(CreditCardFinePayments creditCardPayment)
+        public void AddPayment(IFine payment)
         {
-            creditCardFinePaymentList.Add(creditCardPayment);
+            finePayments.Add(payment);
         }
 
-        public void AddPayment(CashFinePayments cashFinePayment)
-        {
-            cashFinePaymentList.Add(cashFinePayment);
-        }
-
+        // polymorphism 
         public void ProccessPayments()
         {
-            foreach (CreditCardFinePayments creditCardFinePayment in creditCardFinePaymentList)
+            foreach (IFine payment in finePayments)
             {
-                if (creditCardFinePayment.ValidateFinePayment())
+                if (payment.ValidateFinePayment())
                 {
-                    creditCardFinePayment.Authorize();
-                    creditCardFinePayment.FineProcessing();
-                    creditCardFinePayment.LogFinePayment();
+                    Console.WriteLine($"Processing {payment.PaymentType} in {payment.PaymentCurrency}");
+                    payment.ProcessPayment();
+                    payment.LogFinePayment();
                 }
-            }
 
-            foreach (CashFinePayments cashFinePayment in cashFinePaymentList)
-            {
-                if (cashFinePayment.ValidateFinePayment())
+                else
                 {
-                    cashFinePayment.FineProcessing();
-                    cashFinePayment.LogFinePayment();
-                    cashFinePayment.RecordFinePayment();
+                    Console.WriteLine("Payment validation failed. The payment was not processed.");
                 }
             }
         }

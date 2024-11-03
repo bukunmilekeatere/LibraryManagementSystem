@@ -7,7 +7,7 @@ using LibraryManagementSystem.Interfaces;
 
 namespace LibraryManagementSystem.Media
 {
-    public class Magazines : IItem
+    public class Magazines : IMedia
     {
         public string Title { get; set; }
         public string Distributor { get; set; }
@@ -24,7 +24,9 @@ namespace LibraryManagementSystem.Media
 
         public decimal Cost { get; set; }
 
-        public Magazines(string title, string author, string distributor, int serialNumber, string itemType, DateOnly dueDate, decimal cost)
+        private INotifier notifier;
+
+        public Magazines(string title, string author, string distributor, int serialNumber, string itemType, DateOnly dueDate, decimal cost, INotifier notifier)
         {
             Title = title;
             Author = author;
@@ -33,6 +35,7 @@ namespace LibraryManagementSystem.Media
             ItemType = itemType;
             DueDate = dueDate;
             Cost = cost;
+            this.notifier = notifier;
         }
 
         public void GetInfo()
@@ -44,17 +47,35 @@ namespace LibraryManagementSystem.Media
         {
             if (!InUse)
             {
-                Console.WriteLine($"{Title} is not available for loan.");
-                InUse = true;
-                DueDate = DueDate.AddDays(30);
+                Console.WriteLine($"{Title} is available for loan.");
+                return true;
             }
 
             else
             {
-                Console.WriteLine($"{Title} is available for loan");
+                Console.WriteLine($"{Title} is not available for loan.");
+                return false;
+            }
+        }
+
+        public bool IsOverdue()
+        {
+            return DateOnly.FromDateTime(DateTime.Now) > DueDate;
+        }
+
+        public void Loan()
+        {
+            if (IsAvailable())
+            {
+                InUse = true;
+                DueDate = DateOnly.FromDateTime(DateTime.Now).AddDays(30);
+                Console.WriteLine($"You loaned {Title}. It should be returned by {DueDate}");
             }
 
-            return InUse;
+            else
+            {
+                Console.WriteLine($"Cannot loan {Title}, it is in use");
+            }
         }
 
         public void GetDueDate()
@@ -62,6 +83,7 @@ namespace LibraryManagementSystem.Media
             if (!IsAvailable())
             {
                 Console.WriteLine($"The magazine, {Title} is not available for loan. It should be returned in 30 days on {DueDate}");
+                notifier.Notify($"!Reminder!: The Magazine, {Title} is overdue and should have been returned by {DueDate} ");
             }
 
             else

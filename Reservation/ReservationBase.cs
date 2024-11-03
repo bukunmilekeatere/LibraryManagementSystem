@@ -5,11 +5,11 @@ using System;
 public class BaseReservation : IReservation
 {
     public User ReservedBy { get; private set; }
-    public IItem ReservedItem { get; private set; }
+    public IMedia ReservedItem { get; private set; }
     public DateTime ReservationDate { get; private set; }
     public string Status { get; private set; }
 
-    public BaseReservation(User reservedBy, IItem reservedItem)
+    public BaseReservation(User reservedBy, IMedia reservedItem)
     {
         ReservedBy = reservedBy;
         ReservedItem = reservedItem;

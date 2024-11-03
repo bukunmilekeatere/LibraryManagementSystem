@@ -7,7 +7,7 @@ public class Returns : Loans
 {
     public DateOnly ReturnDate { get; set; }
 
-    public Returns(IItem returnedItem, DateOnly returnDate, UserManagement userLoan) : base(returnedItem, DateOnly.FromDateTime(DateTime.Now), userLoan) 
+    public Returns(IMedia returnedItem, DateOnly returnDate, UserManagement userLoan) : base(returnedItem, DateOnly.FromDateTime(DateTime.Now), userLoan) 
     {
         ReturnDate = returnDate;
     }
