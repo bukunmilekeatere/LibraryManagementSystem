@@ -152,7 +152,7 @@ namespace LibraryManagementSystem
 
                         while (!validInput)
                         {
-                            Console.Write("Enter the item number you want to check: ");
+                            Console.Write("Enter the item number to check if overdue: ");
                             string input = Console.ReadLine(); 
 
                             if (int.TryParse(input, out mediaChoice) && mediaChoice > 0 && mediaChoice <= mediaList.Count)
